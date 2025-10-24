@@ -8,7 +8,7 @@ import { DataService } from '../data';
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './workers-dashboard.html',
-  styleUrls: ['./workers-dashboard.css'], // ✅ add your CSS file here
+  styleUrls: ['./workers-dashboard.css'],
 })
 export class WorkersDashboardComponent {
   activeTab = 'NEW';
@@ -17,6 +17,10 @@ export class WorkersDashboardComponent {
 
   updateBookingStatus(booking: any, status: string) {
     booking.status = status;
+    if (status === 'ON_WORK') {
+      booking.completedServices = new Array(booking.serviceTypes.length).fill(false);
+      booking.progress = 0;
+    }
   }
 
   confirmBooking(booking: any) {
@@ -30,7 +34,7 @@ export class WorkersDashboardComponent {
   sendWorkerNote(booking: any) {
     if (booking.newWorkerNote?.trim()) {
       this.data.addWorkerNote(booking.id, booking.newWorkerNote);
-      booking.newWorkerNote = ''; // clear input
+      booking.newWorkerNote = '';
     }
   }
 
@@ -48,8 +52,9 @@ export class WorkersDashboardComponent {
   }
 
   updateProgress(booking: any) {
+    if (!booking.serviceTypes || !booking.completedServices) return;
     const total = booking.serviceTypes.length;
     const completed = booking.completedServices.filter((x: boolean) => x).length;
-    booking.finishedPercent = Math.round((completed / total) * 100);
+    booking.progress = Math.round((completed / total) * 100);
   }
 }
