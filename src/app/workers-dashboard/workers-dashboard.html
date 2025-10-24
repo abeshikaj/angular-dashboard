@@ -1,0 +1,134 @@
+<div class="dashboard-container">
+  <div class="tabs">
+    <button (click)="activeTab = 'NEW'">New</button>
+    <button (click)="activeTab = 'PENDING'">Pending</button>
+    <button (click)="activeTab = 'ON_WORK'">On Work</button>
+    <button (click)="activeTab = 'HISTORY'">History</button>
+  </div>
+  <div class="content-area">
+    <!-- ===================== NEW TAB ===================== -->
+    <div *ngIf="activeTab === 'NEW'">
+      <h2>New Bookings</h2>
+
+      <ng-container *ngFor="let booking of data.bookings">
+        <div *ngIf="booking.status === 'NEW'" class="booking-card">
+          <!-- Summary row -->
+          <div class="summary-row">
+            <div class="summary-info">
+              <p><strong>Customer:</strong> {{ booking.customerName }}</p>
+              <p>
+                <strong>Vehicle:</strong> {{ booking.vehicleType }} - {{ booking.vehicleModel }}
+              </p>
+              <p>
+                <strong>Date:</strong> {{ booking.date }} | <strong>Time:</strong>
+                {{ booking.timeSlot }}
+              </p>
+            </div>
+
+            <!-- Chevron for expand/collapse -->
+            <div class="toggle-chevron" (click)="booking.showDetails = !booking.showDetails">
+              <span [class.expanded]="booking.showDetails">‹</span>
+            </div>
+          </div>
+
+          <!-- Full details (hidden by default) -->
+          <div class="expanded-info" *ngIf="booking.showDetails">
+            <p><strong>Services:</strong> {{ booking.serviceTypes.join(', ') }}</p>
+
+            <div class="form-row-group">
+              <div class="form-row">
+                <label>Return Date:</label>
+                <input type="date" [(ngModel)]="booking.returnDate" [min]="booking.date" />
+              </div>
+              <div class="form-row">
+                <label>Return Time:</label>
+                <select [(ngModel)]="booking.returnTime">
+                  <option value="8:30–10:30">8:30–10:30</option>
+                  <option value="10:30–12:30">10:30–12:30</option>
+                  <option value="2:30–4:30">2:30–4:30</option>
+                  <option value="4:30–6:30">4:30–6:30</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-row-group">
+              <div class="form-row">
+                <label>Payment:</label>
+                <input type="number" [(ngModel)]="booking.payment" />
+              </div>
+              <div class="form-row">
+                <label>Note:</label>
+                <input type="text" [(ngModel)]="booking.note" placeholder="Optional" />
+              </div>
+            </div>
+
+            <!-- ✅ Confirm Booking Button -->
+            <div class="form-row">
+              <button
+                (click)="confirmBooking(booking)"
+                [disabled]="!booking.returnDate || !booking.returnTime || !booking.payment"
+              >
+                Confirm Booking
+              </button>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+
+    <!-- ===================== PENDING TAB ===================== -->
+    <div *ngIf="activeTab === 'PENDING'">
+      <h2>Pending Bookings</h2>
+      <div *ngFor="let booking of data.bookings">
+        <div *ngIf="booking.status === 'PENDING'" class="booking-card">
+          <p><strong>Vehicle:</strong> {{ booking.vehicleType }} - {{ booking.vehicleModel }}</p>
+          <p><strong>Return:</strong> {{ booking.returnDate }} {{ booking.returnTime }}</p>
+          <p><strong>Payment:</strong> {{ booking.payment }}</p>
+          <p><strong>Note:</strong> {{ booking.note || 'No note given' }}</p>
+          <p>Waiting for customer confirmation...</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================== ON WORK TAB ===================== -->
+    <div *ngIf="activeTab === 'ON_WORK'">
+      <h2>On Work</h2>
+      <div *ngFor="let booking of data.bookings">
+        <div *ngIf="booking.status === 'ON_WORK'" class="booking-card">
+          <p><strong>Vehicle:</strong> {{ booking.vehicleType }}</p>
+          <p><strong>Customer:</strong> {{ booking.customerName }}</p>
+          <p><strong>Services:</strong> {{ booking.serviceTypes.join(', ') }}</p>
+          <p><strong>Progress:</strong> {{ booking.progress || 0 }}%</p>
+
+          <label>Progress:</label>
+          <input type="number" [(ngModel)]="booking.progress" min="0" max="100" />
+          <p></p>
+          <progress [value]="booking.progress" max="100"></progress>
+          <p>
+            <strong>Days Remaining:</strong>
+            {{ getRemainingDays(booking.date, booking.returnDate) }}
+          </p>
+
+          <button (click)="updateBookingStatus(booking, 'HISTORY')">
+            Finish & Move to History
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================== HISTORY TAB ===================== -->
+    <div *ngIf="activeTab === 'HISTORY'">
+      <h2>Completed Work</h2>
+      <div *ngFor="let booking of data.bookings">
+        <div *ngIf="booking.status === 'HISTORY'" class="booking-card">
+          <p><strong>Vehicle:</strong> {{ booking.vehicleType }}</p>
+          <p><strong>Customer:</strong> {{ booking.customerName }}</p>
+          <p><strong>Return:</strong> {{ booking.returnDate }} {{ booking.returnTime }}</p>
+          <p><strong>Payment:</strong> {{ booking.payment }}</p>
+          <p><strong>Progress:</strong> {{ booking.progress }}%</p>
+          <p>Status: Finished ✅</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

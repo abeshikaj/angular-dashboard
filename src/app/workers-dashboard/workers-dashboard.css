@@ -1,0 +1,472 @@
+/* ====== General Layout ====== */
+/* Import Inter font from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* ====== General Layout ====== */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f5f7fa;
+  margin: 0;
+  padding: 0;
+}
+/* ====== Apply Inter font to all elements ====== */
+body,
+button,
+input,
+select,
+textarea,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+label,
+span,
+div {
+  font-family: 'Inter', 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 600; /* Bold headings */
+}
+
+button {
+  font-weight: 500; /* Semi-bold buttons */
+}
+
+p,
+label,
+input,
+select {
+  font-weight: 400; /* Normal text */
+}
+
+/* ====== Top Navigation Bar ====== */
+.top-nav {
+  background: linear-gradient(135deg, #2c5f6f 0%, #4a9aae 100%);
+  padding: 15px 30px;
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+}
+
+.top-nav button {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 10px 25px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.top-nav button:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.top-nav button.active {
+  background-color: #e8f4f7;
+  color: #2c5f6f;
+  border-color: #e8f4f7;
+  font-weight: 600;
+}
+
+/* ====== Main Container - Split Layout ====== */
+.dashboard-container {
+  display: flex;
+  margin-top: 60px;
+  height: calc(100vh - 60px);
+}
+
+/* ====== Vertical Sidebar Tabs (Left Side) ====== */
+.tabs {
+  width: 200px;
+  background-color: white;
+  border-right: 3px solid #007bff;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  overflow-y: auto;
+}
+
+.tabs button {
+  background-color: transparent;
+  border: none;
+  padding: 20px 25px;
+  text-align: left;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 15px;
+  color: #555;
+  border-left: 4px solid transparent;
+  border-bottom: 1px solid #f0f0f0;
+  transition: all 0.3s ease;
+  margin: 0;
+  border-radius: 0;
+}
+
+.tabs button:hover {
+  background-color: #f8f9fa;
+  color: #007bff;
+  border-left-color: #b8d4ff;
+}
+
+.tabs button.active {
+  background-color: #e3f2fd;
+  color: #007bff;
+  border-left-color: #007bff;
+  font-weight: 600;
+}
+
+/* ====== Content Area (Right Side) ====== */
+.content-area {
+  flex: 1;
+  overflow-y: auto;
+  padding: 30px 40px;
+  background-color: #f5f7fa;
+}
+
+/* ====== Section Headings ====== */
+h2 {
+  margin: 0 0 25px 0;
+  color: #1a1a1a;
+  font-size: 24px;
+  font-weight: 600;
+  border-left: 5px solid #007bff;
+  padding-left: 15px;
+}
+
+/* ====== Booking Cards ====== */
+.booking-card {
+  background: white;
+  border-radius: 8px;
+  padding: 25px;
+  margin-bottom: 20px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e8e8e8;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.booking-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.booking-card p {
+  margin: 10px 0;
+  font-size: 14px;
+  color: #555;
+  line-height: 1.6;
+}
+
+.booking-card strong {
+  color: #222;
+  font-weight: 600;
+}
+
+/* ====== Labels ====== */
+label {
+  display: block;
+  margin-top: 15px;
+  margin-bottom: 5px;
+  font-weight: 500;
+  font-size: 14px;
+  color: #333;
+}
+
+/* ====== Inputs & Controls ====== */
+input[type='text'],
+input[type='number'],
+input[type='date'],
+select {
+  margin: 5px 0 12px;
+  padding: 8px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+  width: 100%;
+  max-width: 300px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  background-color: #fafafa;
+}
+
+input:focus,
+select:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+  background-color: white;
+}
+
+input::placeholder {
+  color: #999;
+  font-style: italic;
+}
+
+/* ====== Buttons ====== */
+button:not(.tabs button):not(.top-nav button) {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin-top: 15px;
+  margin-right: 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 123, 255, 0.2);
+}
+
+button:not(.tabs button):not(.top-nav button):hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
+}
+
+button:not(.tabs button):not(.top-nav button):active {
+  transform: translateY(0);
+}
+
+/* ====== Progress Bar ====== */
+progress {
+  width: 100%;
+  max-width: 400px;
+  height: 12px;
+  border-radius: 8px;
+  overflow: hidden;
+  border: none;
+  margin: 10px 0;
+}
+
+progress::-webkit-progress-bar {
+  background-color: #e9ecef;
+  border-radius: 8px;
+}
+
+progress::-webkit-progress-value {
+  background: linear-gradient(90deg, #28a745 0%, #20c997 100%);
+  border-radius: 8px;
+  transition: width 0.3s ease;
+}
+
+progress::-moz-progress-bar {
+  background: linear-gradient(90deg, #28a745 0%, #20c997 100%);
+  border-radius: 8px;
+}
+
+/* ====== Status Badges ====== */
+.status-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  margin-left: 8px;
+}
+
+.status-badge.new {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.status-badge.pending {
+  background-color: #cfe2ff;
+  color: #084298;
+}
+
+.status-badge.on-work {
+  background-color: #d1ecf1;
+  color: #0c5460;
+}
+
+.status-badge.completed {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+/* ====== Empty State ====== */
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: #999;
+  font-size: 16px;
+}
+
+.form-row-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-bottom: 12px;
+}
+
+.form-row {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.form-row label {
+  margin-bottom: 4px;
+  font-weight: 500;
+}
+
+.form-row input,
+.form-row select {
+  padding: 6px 10px;
+  font-size: 14px;
+  border: 1px solid #d1d5db;
+  border-radius: 5px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.booking-card {
+  position: relative;
+  background: white;
+  border-radius: 8px;
+  padding: 15px 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e8e8e8;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.summary-info p {
+  margin: 2px 0;
+}
+
+.toggle-arrow {
+  cursor: pointer;
+  font-size: 16px;
+  color: #007bff;
+  margin-left: 10px;
+  user-select: none;
+}
+
+.toggle-arrow span {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.toggle-arrow span.expanded {
+  transform: rotate(90deg); /* points down when expanded */
+}
+
+.expanded-info {
+  margin-top: 10px;
+  border-top: 1px solid #e8e8e8;
+  padding-top: 10px;
+}
+
+.form-row-group {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.form-row {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.form-row label {
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+
+input,
+select {
+  padding: 6px 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+/* ====== Responsive Design ====== */
+@media (max-width: 768px) {
+  .dashboard-container {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .tabs {
+    width: 100%;
+    flex-direction: row;
+    overflow-x: auto;
+    border-right: none;
+    border-bottom: 3px solid #007bff;
+  }
+
+  .tabs button {
+    flex: 1;
+    min-width: 100px;
+    padding: 15px 10px;
+    text-align: center;
+    border-left: none;
+    border-bottom: 4px solid transparent;
+  }
+
+  .tabs button.active {
+    border-left: none;
+    border-bottom-color: #007bff;
+  }
+
+  .content-area {
+    padding: 20px 15px;
+  }
+
+  .booking-card {
+    padding: 15px;
+  }
+
+  input,
+  select,
+  button {
+    max-width: 100%;
+  }
+
+  .top-nav {
+    flex-wrap: wrap;
+    padding: 10px 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  h2 {
+    font-size: 20px;
+  }
+
+  .booking-card p {
+    font-size: 13px;
+  }
+
+  .tabs button {
+    font-size: 13px;
+    padding: 12px 8px;
+  }
+}

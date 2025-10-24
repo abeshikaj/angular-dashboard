@@ -1,0 +1,51 @@
+<h2>Customer Booking Form</h2>
+<form (ngSubmit)="submitForm()">
+  <label>Vehicle Type:</label>
+  <select [(ngModel)]="vehicleType" name="vehicleType" required>
+    <option value="">-- Select --</option>
+    <option>Car</option>
+    <option>Bus</option>
+    <option>Bike</option>
+    <option>Other</option>
+  </select>
+
+  <br /><br />
+
+  <label>Vehicle Model:</label>
+  <input [(ngModel)]="vehicleModel" name="vehicleModel" required />
+
+  <br /><br />
+
+  <label>Service Type:</label><br />
+  <label><input type="checkbox" [(ngModel)]="services.service" name="service" /> Service</label>
+  <label
+    ><input type="checkbox" [(ngModel)]="services.mechanical" name="mechanical" /> Mechanical</label
+  >
+  <label><input type="checkbox" [(ngModel)]="services.parts" name="parts" /> Parts Changing</label>
+  <label><input type="checkbox" [(ngModel)]="services.other" name="other" /> Other</label>
+
+  <br /><br />
+
+  <label>Date:</label>
+  <input type="date" [(ngModel)]="date" name="date" [min]="minDate" required />
+
+  <br /><br />
+
+  <label>Time Slot:</label>
+  <select [(ngModel)]="timeSlot" name="timeSlot" required>
+    <option value="">-- Select --</option>
+    <option>8:30–10:30</option>
+    <option>10:30–12:30</option>
+    <option>2:30–4:30</option>
+    <option>4:30–6:30</option>
+  </select>
+
+  <br /><br />
+
+  <label>Customer Name:</label>
+  <input [(ngModel)]="customerName" name="customerName" required />
+
+  <br /><br />
+
+  <button type="submit">Submit</button>
+</form>

@@ -1,0 +1,51 @@
+<h2>Customer Response</h2>
+
+<div *ngFor="let booking of data.bookings">
+  <div *ngIf="booking.status === 'PENDING'" class="booking-card">
+    <p><strong>Vehicle:</strong> {{ booking.vehicleType }} - {{ booking.vehicleModel }}</p>
+    <p><strong>Date:</strong> {{ booking.date }} | <strong>Time:</strong> {{ booking.timeSlot }}</p>
+    <p><strong>Services:</strong> {{ booking.serviceTypes.join(', ') }}</p>
+
+    <!-- ✅ Show worker inputs -->
+    <p><strong>Return Date:</strong> {{ booking.returnDate }}</p>
+    <p><strong>Return Time:</strong> {{ booking.returnTime }}</p>
+    <p><strong>Note:</strong> {{ booking.note || 'No note given' }}</p>
+    <p><strong>Payment:</strong> {{ booking.payment }}</p>
+
+    <!-- ✅ Buttons for customer action -->
+    <button (click)="confirmBooking(booking)">Confirm</button>
+    <button (click)="cancelBooking(booking)">Cancel</button>
+  </div>
+
+  <!-- When status is ON_WORK -->
+  <div *ngIf="booking.status === 'ON_WORK'">
+    <p><strong>Work Progress:</strong> {{ booking.progress }}%</p>
+    <progress [value]="booking.progress" max="100"></progress>
+
+    <p><strong>Days Remaining:</strong> {{ getRemainingDays(booking.date, booking.returnDate) }}</p>
+
+    <!-- Show Worker Notes -->
+    <div *ngIf="booking.workerNotes.length > 0">
+      <h4>Workshop Notes:</h4>
+      <ul>
+        <li *ngFor="let note of booking.workerNotes">
+          🛠 {{ note.text }} ({{ note.time | date : 'short' }})
+        </li>
+      </ul>
+    </div>
+
+    <!-- Customer Add Note -->
+    <input
+      type="text"
+      [(ngModel)]="booking.newCustomerNote"
+      placeholder="Add note to workshop..."
+    />
+    <button (click)="sendCustomerNote(booking)">Send</button>
+  </div>
+
+  <!-- ✅ Show cancelled bookings (optional) -->
+  <div *ngIf="booking.status === 'CANCELLED'" class="booking-card cancelled">
+    <p><strong>Vehicle:</strong> {{ booking.vehicleType }}</p>
+    <p>Status: ❌ Cancelled</p>
+  </div>
+</div>

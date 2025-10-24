@@ -1,0 +1,51 @@
+/* ===== 🌟 NAVBAR STYLING 🌟 ===== */
+
+nav {
+  background: linear-gradient(90deg, #2c3e50, #4ca1af);
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  flex-wrap: wrap;
+}
+
+/* ===== NAV LINKS ===== */
+nav a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: 6px;
+  transition: all 0.25s ease;
+}
+
+/* ===== Hover Effect ===== */
+nav a:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+/* ===== Active Route Highlight ===== */
+nav a.active {
+  background: #ffffff;
+  color: #2c3e50;
+  font-weight: 600;
+}
+
+/* ===== Mobile View ===== */
+@media (max-width: 600px) {
+  nav {
+    flex-direction: column;
+    gap: 10px;
+    padding: 16px;
+  }
+
+  nav a {
+    width: 100%;
+    text-align: center;
+  }
+}
